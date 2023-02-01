@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Simple Image Editor</title>
+        <link rel="stylesheet" href="css/site.css">
+    </head>
+    <body>
+        <h1 class="gradient-text ml1">
+            <span class="text-wrapper">
+                <span class="letters">Simple Image Editor</span>
+            </span>
+        </h1>
+        <div class="container">
+            <div class="image-editor">
+                <div class="controls">
+                    <div class="input-container">
+                        <input type="file" id="fileInput" class="input-field" />
+                    </div>
+                    <select id="sizeSelect">
+                        <option value="50">50%</option>
+                        <option value="75">75%</option>
+                        <option value="100">100%</option>
+                        <option value="150">150%</option>
+                    </select>
+                    <button id="resizeButton">Resize</button>
+                    <br />
+                    <select id="filterSelect">
+                        <option value="none">None</option>
+                        <option value="grayscale">Grayscale</option>
+                        <option value="sepia">Sepia</option>
+                        <option value="invert">Invert</option>
+                    </select>
+                    <button id="applyFilterButton">Apply Filter</button>
+                </div>
+                <a id="downloadLink" class="download-button" download>Download Image</a>
+            </div>
+            <div class="canvas-container">
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+        <script src="script/main.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+    </body>
+</html>
