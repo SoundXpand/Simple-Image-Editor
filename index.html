@@ -1,100 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Simple Image Editor</title>
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-        <link rel="manifest" href="favicon/site.webmanifest">
-    </head>
-    <body class="bg-gray-100 primary-color secondary-color">
-    <div class="fixed inset-x-0 top-0 z-10 backdrop-filter backdrop-blur-lg bg-opacity-60 bg-color-primary">
-        <div class="container mx-auto py-4">
-            <nav class="flex items-center justify-between">
-                <div class="flex items-center space-x-4">
-                    <img class="h-8 w-8" src="assets/logo.png" alt="Logo">
-                    <span class="ml-3 text-l">Simple Image Editor</span>
-                </div>
-                <div class="space-x-4">
-                    <a href="/" class="text-dark">Home</a>
-                </div>
-            </nav>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Image Editor</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+</head>
+<body class="bg-gray-100 primary-color secondary-color">
+<div class="fixed inset-x-0 top-0 z-10 backdrop-filter backdrop-blur-lg bg-opacity-60 bg-color-primary">
+    <div class="container mx-auto py-4">
+        <nav class="flex items-center justify-between">
+            <div class="flex items-center space-x-2 sm:space-x-4">
+                <img class="h-8 w-8" src="assets/logo.png" alt="Logo">
+                <span class="hidden sm:inline-block text-l">Simple Image Editor</span>
+            </div>
+            <div class="space-x-4">
+                <a href="/" class="text-dark">Home</a>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="container mx-auto py-8 mt-8">
+    <h1 class="text-3xl font-semibold mb-8">Simple Image Editor</h1>
+    <div class="image-editor">
+        <div class="flex flex-col space-y-4 mb-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+            <div class="flex-1">
+                <input type="file" id="fileInput" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary" />
+            </div>
+            <div class="w-full sm:w-40">
+                <select id="sizeSelect" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary">
+                    <option value="50">50%</option>
+                    <option value="75">75%</option>
+                    <option value="100">100%</option>
+                    <option value="150">150%</option>
+                </select>
+            </div>
+            <button id="resizeButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary">Resize</button>
+        </div>
+        <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+            <div class="w-full sm:w-40">
+                <select id="filterSelect" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary">
+                    <option value="none">None</option>
+                    <option value="grayscale">Grayscale</option>
+                    <option value="sepia">Sepia</option>
+                    <option value="invert">Invert</option>
+                </select>
+            </div>
+            <button id="applyFilterButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary">Apply Filter</button>
+            <a id="downloadLink" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary" download>Download Image</a>
         </div>
     </div>
-    <div class="container mx-auto py-8 mt-8">
-        <h1 class="text-3xl font-semibold mb-8">Simple Image Editor</h1>
-        <div class="image-editor">
-            <div class="flex flex-col space-y-4 mb-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-                <div class="flex-1">
-                    <input type="file" id="fileInput" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary" />
-                </div>
-                <div class="w-full sm:w-40">
-                    <select id="sizeSelect" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary">
-                        <option value="50">50%</option>
-                        <option value="75">75%</option>
-                        <option value="100">100%</option>
-                        <option value="150">150%</option>
-                    </select>
-                </div>
-                <button id="resizeButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary">Resize</button>
-            </div>
-            <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-                <div class="w-full sm:w-40">
-                    <select id="filterSelect" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary">
-                        <option value="none">None</option>
-                        <option value="grayscale">Grayscale</option>
-                        <option value="sepia">Sepia</option>
-                        <option value="invert">Invert</option>
-                    </select>
-                </div>
-                <button id="applyFilterButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary">Apply Filter</button>
-                <a id="downloadLink" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary" download>Download Image</a>
-            </div>
-        </div>
-        <div class="canvas-container mt-8">
-            <canvas id="canvas" class="border border-gray-300 line-color"></canvas>
-        </div>
+    <div class="canvas-container mt-8">
+        <canvas id="canvas" class="border border-gray-300 line-color"></canvas>
     </div>
-        <footer class="text-gray-600 body-font">
-  <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
-    <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
-      <img class="h-8 w-8" src="assets/logo.png" alt="Logo">
-      <span class="ml-3 text-l">Simple Image Editor</span>
-    </a>
-    <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 SoundXpand —
-      <a href="https://soundxpand.com/" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@soundxpand</a>
-    </p>
-    <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
-      <a href="https://www.facebook.com/SoundXpand/" class="text-gray-500">
-        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-          <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-        </svg>
-      </a>
-      <a href="https://twitter.com/SoundXpand" class="ml-3 text-gray-500">
-        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-          <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-        </svg>
-      </a>
-      <a href="https://www.instagram.com/thesoundxpand/" class="ml-3 text-gray-500">
-        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-          <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-          <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-        </svg>
-      </a>
-      <a href="https://www.linkedin.com/search/results/companies/?keywords=soundxpand" class="ml-3 text-gray-500">
-        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
-          <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
-          <circle cx="4" cy="4" r="2" stroke="none"></circle>
-        </svg>
-      </a>
-    </span>
-  </div>
+</div>
+<footer class="text-gray-600 body-font">
+    <div class="container px-5 py-8 mx-auto flex flex-wrap items-center justify-between">
+        <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+            <img class="h-8 w-8" src="assets/logo.png" alt="Logo">
+            <span class="hidden md:inline-block ml-3 text-l">Simple Image Editor</span>
+        </a>
+        <p class="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 SoundXpand —
+            <a href="https://soundxpand.com/" class="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@soundxpand</a>
+        </p>
+        <span class="inline-flex justify-center sm:justify-start mt-4 sm:mt-0">
+            <a href="https://www.facebook.com/SoundXpand/" class="text-gray-500">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                </svg>
+            </a>
+            <a href="https://twitter.com/SoundXpand" class="ml-3 text-gray-500">
+                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/thesoundxpand/" class="ml-3 text-gray-500">
+                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                </svg>
+            </a>
+            <a href="https://www.linkedin.com/search/results/companies/?keywords=soundxpand" class="ml-3 text-gray-500">
+                <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                    <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                    <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                </svg>
+            </a>
+        </span>
+    </div>
 </footer>
-    <script src="script/main.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+<script src="script/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
 </body>
 </html>
