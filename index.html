@@ -5,43 +5,96 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Simple Image Editor</title>
-        <link rel="stylesheet" href="css/site.css">
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link rel="manifest" href="favicon/site.webmanifest">
+        <style>
+        .primary-color {
+            --color-primary: #ec9c58;
+        }
+
+        .secondary-color {
+            --color-secondary: #4e5e75;
+        }
+
+        .border-color-primary {
+            --border-color-primary: #74b2d1;
+        }
+
+        .bg-color-primary {
+            --bg-color-primary: #cfd9e2;
+        }
+
+        .shadow-color-primary {
+            --shadow-color-primary: #b98456;
+        }
+
+        .border-color-secondary {
+            --border-color-secondary: #949cac;
+        }
+
+        .bg-color-secondary {
+            --bg-color-secondary: #d4cc80;
+        }
+
+        .line-color {
+            --color-line: #d49c88;
+        }
+        </style>
     </head>
-    <body>
-        <h1 class="gradient-text ml1">
-            <span class="text-wrapper">
-                <span class="letters">Simple Image Editor</span>
-            </span>
-        </h1>
-        <div class="container">
-            <div class="image-editor">
-                <div class="controls">
-                    <div class="input-container">
-                        <input type="file" id="fileInput" class="input-field" />
-                    </div>
-                    <select id="sizeSelect">
+    <body class="bg-gray-100 primary-color secondary-color">
+    <div class="fixed inset-x-0 top-0 z-10 backdrop-filter backdrop-blur-lg bg-opacity-60 bg-color-primary">
+        <div class="container mx-auto py-4">
+            <nav class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <img class="h-8 w-8" src="path/to/logo.png" alt="Logo">
+                    <h1 class="text-white text-lg font-semibold">Simple Image Editor</h1>
+                </div>
+                <div class="space-x-4">
+                    <a href="#" class="text-white">Link 1</a>
+                    <a href="#" class="text-white">Link 2</a>
+                    <a href="#" class="text-white">Link 3</a>
+                </div>
+            </nav>
+        </div>
+    </div>
+    <div class="container mx-auto py-8">
+        <h1 class="text-3xl font-semibold mb-8">Simple Image Editor</h1>
+        <div class="image-editor">
+            <div class="flex flex-col space-y-4 mb-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+                <div class="flex-1">
+                    <input type="file" id="fileInput" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary" />
+                </div>
+                <div class="w-full sm:w-40">
+                    <select id="sizeSelect" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary">
                         <option value="50">50%</option>
                         <option value="75">75%</option>
                         <option value="100">100%</option>
                         <option value="150">150%</option>
                     </select>
-                    <button id="resizeButton">Resize</button>
-                    <br />
-                    <select id="filterSelect">
+                </div>
+                <button id="resizeButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary">Resize</button>
+            </div>
+            <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
+                <div class="w-full sm:w-40">
+                    <select id="filterSelect" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary">
                         <option value="none">None</option>
                         <option value="grayscale">Grayscale</option>
                         <option value="sepia">Sepia</option>
                         <option value="invert">Invert</option>
                     </select>
-                    <button id="applyFilterButton">Apply Filter</button>
                 </div>
-                <a id="downloadLink" class="download-button" download>Download Image</a>
-            </div>
-            <div class="canvas-container">
-                <canvas id="canvas"></canvas>
+                <button id="applyFilterButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary">Apply Filter</button>
+                <a id="downloadLink" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary" download>Download Image</a>
             </div>
         </div>
-        <script src="script/main.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-    </body>
+        <div class="canvas-container mt-8">
+            <canvas id="canvas" class="border border-gray-300 line-color"></canvas>
+        </div>
+    </div>
+    <script src="script/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+</body>
 </html>
