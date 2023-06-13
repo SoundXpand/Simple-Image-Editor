@@ -25,40 +25,130 @@
         </nav>
     </div>
 </div>
-<div class="container mx-auto px-5 py-8 mt-20">
-    <h1 class="text-3xl font-semibold mb-8">Simple Image Editor</h1>
-    <div class="image-editor">
-        <div class="flex flex-col space-y-4 mb-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-            <div class="flex-1">
-                <input type="file" id="fileInput" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary" />
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+
+<section class="text-gray-600 body-font overflow-hidden">
+    <div class="container px-5 py-24 mx-auto">
+        <div class="lg:w-4/5 mx-auto flex flex-wrap">
+            <div class="placeholder bg-white flex items-center justify-center" ondragover="event.preventDefault()" ondrop="dropHandler(event)">
+                <label for="imageUpload" class="cursor-pointer">
+                    <div><span class="bg-gray-100 inline-flex py-2 px-4 rounded-lg items-center hover:bg-gray-200 focus:outline-none">Click Here</span><span class="text-gray-400"> or Drag & Drop</span></div>
+                    <input id="imageUpload" type="file" accept="image/*" class="hidden" onchange="fileSelectHandler(event)" />
+                </label>
             </div>
-            <div class="w-full sm:w-40">
-                <select id="sizeSelect" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary">
-                    <option value="50">50%</option>
-                    <option value="75">75%</option>
-                    <option value="100">100%</option>
-                    <option value="150">150%</option>
-                </select>
+
+            <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                <h2 class="text-sm title-font text-gray-500 tracking-widest">ONLINE EDITOR</h2>
+                <h1 id="fileName" class="text-gray-900 text-3xl title-font font-medium mb-1">Undefined</h1>
+                <div class="flex mb-4">
+                    <span class="flex items-center">
+                        <svg width="20px" height="20px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.71 4.29l-3-3L10 1H4L3 2v12l1 1h9l1-1V5l-.29-.71zM13 14H4V2h5v4h4v8zm-3-9V2l3 3h-3z" />
+                        </svg>
+                        <span id="fileType" class="text-gray-600 ml-3">Unspecified</span>
+                    </span>
+                    <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200 space-x-2s">
+                        <span class="flex items-center">
+                            <svg width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#000000" stroke-width="1" stroke-linecap="round" stroke-linejoin="miter">
+                                <line x1="21" y1="5" x2="21" y2="19" stroke-linecap="round"></line>
+                                <line x1="3" y1="19" x2="3" y2="5" stroke-linecap="round"></line>
+                                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                <path d="M21,19c0,1.66-4,3-9,3s-9-1.34-9-3"></path>
+                                <path d="M21,12c0,1.66-4,3-9,3s-9-1.34-9-3"></path>
+                            </svg>
+                            <span id="fileSize" class="text-gray-600 ml-3">Null</span>
+                        </span>
+                    </span>
+                </div>
+
+                <div class="flex mt-6 items-center mb-5">
+                    <div class="flex items-center">
+                        <span class="mr-3">Resize</span>
+                        <div class="relative">
+                            <select id="resizeSelect" class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
+                                <option value="50">50%</option>
+                                <option value="75">75%</option>
+                                <option value="100">100%</option>
+                                <option value="150">150%</option>
+                                <option value="300">300%</option>
+                            </select>
+                            <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div>
+                            <button onclick="resizeImage(parseInt(document.getElementById('resizeSelect').value))" class="flex ml-4 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Apply</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-100 mb-5">
+                    <div class="flex items-center">
+                        <span class="mr-3">Filter</span>
+                        <button id="filterNone" class="border-2 border-gray-300 mr-1 rounded-full w-6 h-6 focus:outline-none"></button>
+                        <button id="filterGrayscale" class="border-2 border-gray-300 bg-black-white rounded-full w-6 h-6 focus:outline-none" control-id="ControlID-78"></button>
+                        <button id="filterSepia" class="border-2 border-gray-300 ml-1 bg-amber-400 rounded-full w-6 h-6 focus:outline-none"></button>
+                        <button id="filterInvert" class="border-2 border-gray-300 ml-1 bg-blue-black rounded-full w-6 h-6 focus:outline-none"></button>
+
+                        <div></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="col-start-1 col-end-3">
+                        <div class="flex justify-start .">
+                            <input type="file" accept="image/*" onchange="replaceImage(event)" class="hidden" id="imageInput" />
+                            <label for="imageInput" class="inline-flex items-center mt-auto w-9/12 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-base cursor-pointer">
+                                Change Image
+                                <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-70 w-4 h-4 ml-auto">
+                                    <path
+                                        fill-rule="evenodd"
+                                        clip-rule="evenodd"
+                                        d="M13.1976 1.21963L3.11967 11.2976C2.9692 11.448 2.87065 11.6426 2.83836 11.8529L2.13291 16.4474C2.03041 17.115 2.60551 17.6901 3.27309 17.5876L7.86762 16.8822C8.07795 16.8499 8.2725 16.7513 8.42297 16.6009L18.5009 6.52294C18.8914 6.13241 18.8914 5.49925 18.5009 5.10872L14.6118 1.21963C14.2213 0.82911 13.5881 0.829111 13.1976 1.21963ZM4.31657 15.404L4.76548 12.4802L13.9047 3.34095L16.3796 5.81583L7.24036 14.9551L4.31657 15.404Z"
+                                        fill="#000000"
+                                    />
+                                    <path d="M11.442 5.24658L12.5027 4.18592L15.7436 7.42683L14.6829 8.48749L11.442 5.24658Z" fill="#000000" />
+                                </svg>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-end-7 col-span-2">
+                        <div class="flex justify-end ...">
+                            <div class="relative">
+                                <select id="fileFormatSelect" class="rounded border appearance-none border-gray-300 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 text-base pl-3 pr-10">
+                                    <option value="png">PNG</option>
+                                    <option value="jpg">JPG</option>
+                                </select>
+                                <span class="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4" viewBox="0 0 24 24">
+                                        <path d="M6 9l6 6 6-6"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                            <div>
+                                <button onclick="downloadImage()" class="flex ml-4 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Download</button>
+                            </div>
+                            <div>
+                                <button
+                                    onclick="location.href='https://github.com/SoundXpand/Simple-Image-Editor'"
+                                    type="button"
+                                    class="rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4"
+                                >
+                                    <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button id="resizeButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary">Resize</button>
-        </div>
-        <div class="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4">
-            <div class="w-full sm:w-40">
-                <select id="filterSelect" class="w-full border border-gray-300 py-2 px-4 rounded border-color-primary">
-                    <option value="none">None</option>
-                    <option value="grayscale">Grayscale</option>
-                    <option value="sepia">Sepia</option>
-                    <option value="invert">Invert</option>
-                </select>
-            </div>
-            <button id="applyFilterButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary">Apply Filter</button>
-            <a id="downloadLink" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded shadow-color-primary" download>Download Image</a>
         </div>
     </div>
-    <div class="canvas-container mt-8">
-        <canvas id="canvas" class="border border-gray-300 line-color max-w-full"></canvas>
-    </div>
-</div>
+</section>
+
 <footer class="text-gray-600 body-font">
     <div class="container px-5 py-8 mx-auto flex flex-wrap items-center justify-between">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
